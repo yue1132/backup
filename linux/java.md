@@ -13,7 +13,7 @@
 		[Desktop Entry]
 		Name=Eclipse
 		Comment=Eclipse 3.42 IDE
-		Exec=/usr/java/eclipse/eclipse <— 这里改成你的eclipse的安装位置
+		Exec=/usr/java/eclipse/eclipse #这里改成你的eclipse的安装位置
 		Icon=/usr/java/eclipse/icon.xpm
 		Terminal=false
 		Type=Application
