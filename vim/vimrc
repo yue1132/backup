@@ -1,0 +1,131 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+"Plugin 'ascenator/L9', {'name': 'newL9'}
+
+
+"vim-tagbar插件可以帮你快速了解当前文件的结构，并让你可以在各个内容之间快速跳
+Plugin 'https://github.com/majutsushi/tagbar.git'
+nmap <F8> :TagbarToggle<CR>
+
+"nerdtree是一个用于浏览文件系统的树形资源管理外挂,它可以让你像使用Windows档案总管一样在VIM中浏览文件系统并且打开文件或目录
+"移动：hjkl
+"展开：o
+"切换窗口：Ctrl + w，多次执行或加方向键hjkl来切换
+"其他：在侧边栏输入'?'看，:P
+Bundle 'scrooloose/nerdtree'
+"let NERDTreeWinPos='right'
+let NERDTreeWinSize=30
+
+"在使用 NERDTree 的过程中有一些不太方便的地方就是打开的各个文件不共享
+"NERDTree，所以就需要配合安装一个共享插件 vim-nerdtree-tabs，
+"这就让你感觉只是打开了一个 NERDTreekk
+Bundle 'jistr/vim-nerdtree-tabs'
+" 关闭NERDTree快捷键
+ map <leader>t :NERDTreeToggle<CR>
+ " 显示行号
+ let NERDTreeShowLineNumbers=1
+ let NERDTreeAutoCenter=1
+ " 是否显示隐藏文件
+ let NERDTreeShowHidden=1
+ " 设置宽度
+ let NERDTreeWinSize=31
+ " 在终端启动vim时，共享NERDTree
+ let g:nerdtree_tabs_open_on_console_startup=1
+ " 忽略一下文件的显示
+ let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+ " 显示书签列表
+ let NERDTreeShowBookmarks=1
+
+"git 信息直接在 NERDTree 中显示出来， 和 Eclipse一样，修改的文件和增加的文件都给出相应的标注
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+"是一个用于浏览文件系统的树形资源管理外挂,它可以让你像使用Windows档案总管一样在VIM中浏览文件系统并且打开文件或目录
+Bundle 'fholgado/minibufexpl.vim'
+let g:miniBufExplMapWindowNavVim = 1   
+let g:miniBufExplMapWindowNavArrows = 1   
+let g:miniBufExplMapCTabSwitchBufs = 1   
+let g:miniBufExplModSelTarget = 1  
+let g:miniBufExplMoreThanOne=0
+map <F11> :MBEbp<CR>
+map <F12> :MBEbn<CR>
+
+"ctrp 类似sublime的ctrl+p功能
+Plugin 'https://github.com/kien/ctrlp.vim.git'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+" 设置过滤不进行查找的后缀名
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
+
+"syntastic语法检查插件
+Plugin 'https://github.com/scrooloose/syntastic.git'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"自动补全插件
+Bundle 'Valloric/YouCompleteMe'
+
+
+
+
+"vim-airline是一款状态栏增强插件，可以让你的Vim状态栏非常的美观，同时包括了buffer显示条扩展smart tab line以及集成了一些插件
+Bundle 'bling/vim-airline'
+set laststatus=2
+
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
