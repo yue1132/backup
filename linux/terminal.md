@@ -24,3 +24,11 @@ sudo apt-get install fbterm
 
 系统用户管理:
 	adduser newuser 创建一个用户名为newuser的新用户
+
+
+终端打开应用程序：
+	firefox &	加上&符号会使应用程序在后台运行，不会占用控制台。
+
+条件执行语句：
+	可以使用Bash运行两个命令，一个接着一个。第二个命令只有当第一个命令运行完毕后才会运行。要做到这样只需要在两个命令中使用“&&”分隔即可。
+比如： “sleep”命令会以秒为单位接受一个参数。sleep 5 && gnome-screenshot
