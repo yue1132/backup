@@ -1,6 +1,23 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set nu
+set autoindent
+"用jk替换ESC键
+inoremap jk <ESC>
+
+"set mapleader 设置启动快速启动.vimrc的方式（,ee）
+let mapleader = ","
+"Fast reloading of the .vimrc
+map <silent> <leader>ss :source ~/.vimrc<cr>
+"Fast editing of .vimrc
+map <silent> <leader>ee :e ~/.vimrc<cr>
+"When .vimrc is edited, reload it
+autocmd! bufwritepost .vimrc source ~/.vimrc 
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -29,8 +46,13 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 
 "vim-tagbar插件可以帮你快速了解当前文件的结构，并让你可以在各个内容之间快速跳
-Plugin 'https://github.com/majutsushi/tagbar.git'
-nmap <F8> :TagbarToggle<CR>
+Bundle 'majutsushi/tagbar'
+"nmap <Leader>tb :TagbarToggle<CR>      "快捷键设置
+let g:tagbar_ctags_bin='ctags'          "ctags程序的路径
+let g:tagbar_width=30                   "窗口宽度的设置
+map <F3> :Tagbar<CR>
+"autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
+"如果是c语言的程序的话，tagbar自动开启
 
 "nerdtree是一个用于浏览文件系统的树形资源管理外挂,它可以让你像使用Windows档案总管一样在VIM中浏览文件系统并且打开文件或目录
 "移动：hjkl
@@ -40,26 +62,27 @@ nmap <F8> :TagbarToggle<CR>
 Bundle 'scrooloose/nerdtree'
 "let NERDTreeWinPos='right'
 let NERDTreeWinSize=30
+map <F2> :NERDTreeToggle<CR>
 
 "在使用 NERDTree 的过程中有一些不太方便的地方就是打开的各个文件不共享
 "NERDTree，所以就需要配合安装一个共享插件 vim-nerdtree-tabs，
 "这就让你感觉只是打开了一个 NERDTreekk
-Bundle 'jistr/vim-nerdtree-tabs'
+"Bundle 'jistr/vim-nerdtree-tabs'
 " 关闭NERDTree快捷键
- map <leader>t :NERDTreeToggle<CR>
+" map <leader>t :NERDTreeToggle<CR>
  " 显示行号
- let NERDTreeShowLineNumbers=1
- let NERDTreeAutoCenter=1
+" let NERDTreeShowLineNumbers=1
+" let NERDTreeAutoCenter=1
  " 是否显示隐藏文件
- let NERDTreeShowHidden=1
+" let NERDTreeShowHidden=1
  " 设置宽度
- let NERDTreeWinSize=31
+" let NERDTreeWinSize=31
  " 在终端启动vim时，共享NERDTree
- let g:nerdtree_tabs_open_on_console_startup=1
+" let g:nerdtree_tabs_open_on_console_startup=1
  " 忽略一下文件的显示
- let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" let NERDTreeIgnore=['\.pyc','\~$','\.swp']
  " 显示书签列表
- let NERDTreeShowBookmarks=1
+" let NERDTreeShowBookmarks=1
 
 "git 信息直接在 NERDTree 中显示出来， 和 Eclipse一样，修改的文件和增加的文件都给出相应的标注
 Plugin 'Xuyuanp/nerdtree-git-plugin'
@@ -113,6 +136,18 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'bling/vim-airline'
 set laststatus=2
 
+Bundle 'vim-scripts/winmanager'
+let g:NERDTree_title="[NERDTree]"
+let g:winManagerWindowLayout="NERDTree|BufExplorer"
+
+function! NERDTree_Start()
+	    exec 'NERDTree'
+    endfunction
+function! NERDTree_IsValid()
+	return 1
+endfunction
+nmap wm :WMToggle<CR>
+
 
 
 " All of your Plugins must be added before the following line
@@ -129,3 +164,7 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+"
+"
+"
+
